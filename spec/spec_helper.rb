@@ -14,10 +14,10 @@ ensure
   $stdout = old_stdout
 end
 
-def rbsh(args)
+def rbsh(*args)
   capture_stdout do
     begin
-      Rbsh::CLI.start(args.split(" "))
+      Rbsh::CLI.start(args)
     rescue SystemExit
     end
   end

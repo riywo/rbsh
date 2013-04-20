@@ -17,4 +17,9 @@ describe Rbsh::Shell do
     subject { @shell.echo("test").grep("no").to_s }
     it { should eq "\n" }
   end
+
+  describe "load_script!('echo(\"test\")')" do
+    subject { @shell.load_script!('echo("test")').to_s }
+    it { should eq "test\n" }
+  end
 end

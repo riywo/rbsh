@@ -3,6 +3,10 @@ require "open3"
 class Rbsh::Shell < BasicObject
   attr_writer :_queue
 
+  def load_script!(script)
+    instance_eval(script)
+  end
+
   def to_s
     commands = _queue.map do |c|
       [ c[:command], *c[:args] ].compact.map(&:to_s)
