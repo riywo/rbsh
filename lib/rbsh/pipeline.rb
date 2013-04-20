@@ -3,6 +3,10 @@ require "open3"
 class Rbsh::Pipeline < BasicObject
   attr_writer :_queue
 
+  def initialize(name, *args, &block)
+    _push(name, *args)
+  end
+
   def to_ary
     commands = _queue.map do |c|
       [ c[:command], *c[:args] ].compact.map(&:to_s)

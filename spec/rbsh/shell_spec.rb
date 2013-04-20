@@ -18,7 +18,7 @@ describe Rbsh::Shell do
     it { should eq "\n" }
   end
 
-  describe "load_script!('echo(\"test\")')" do
+  describe "load_script! 'echo(\"test\")'" do
     subject { @shell.load_script!('echo("test")').to_s }
     it { should eq "test\n" }
   end
