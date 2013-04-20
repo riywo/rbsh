@@ -1,5 +1,5 @@
 describe Rbsh::Shell do
-  before :all do
+  before :each do
     @shell = Rbsh::Shell.new
   end
 
