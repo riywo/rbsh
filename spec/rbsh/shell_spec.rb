@@ -32,4 +32,10 @@ describe Rbsh::Shell do
     subject { @shell.run! }
     its(:to_s) { should eq "test1\ntest2\n" }
   end
+
+  describe "load_script! 'echo(\"test1\")\\necho(\"test2\")'" do
+    before { @shell.load_script!("echo(\"test1\")\necho(\"test2\")") }
+    subject { @shell.run! }
+    its(:to_s) { should eq "test1\ntest2\n" }
+  end
 end

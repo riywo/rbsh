@@ -6,13 +6,13 @@ class Rbsh::Shell < BasicObject
   end
 
   def run!
-    @_result.set(@_pipeline.run!)
+    @_result.append(@_pipeline.run!)
     @_result
   end
 
   def method_missing(name, *args, &block)
     if @_pipeline
-      @_result.set(@_pipeline.run!)
+      @_result.append(@_pipeline.run!)
     end
     @_pipeline = ::Rbsh::Pipeline.new(name, *args)
     @_pipeline
@@ -20,6 +20,7 @@ class Rbsh::Shell < BasicObject
 
   def load_script!(script)
     instance_eval(script)
+    self
   end
 
   class Result
@@ -27,7 +28,7 @@ class Rbsh::Shell < BasicObject
       @lines = []
     end
 
-    def set(lines)
+    def append(lines)
       @lines += lines.to_ary
     end
 

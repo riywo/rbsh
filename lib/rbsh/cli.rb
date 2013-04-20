@@ -21,6 +21,8 @@ class Rbsh::CLI
       puts @shell.load_script!(@opts[:e]).run!.to_s
     else
       script_file = ARGV[0]
+      script = File.open(script_file).read
+      puts @shell.load_script!(script).run!.to_s
     end
   end
 

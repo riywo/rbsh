@@ -1,0 +1,4 @@
+#!/usr/bin/env rbsh
+echo("test1")
+cat("/etc/hosts").grep("localhost")
+echo("test2")
