@@ -1,6 +1,7 @@
 require 'rspec'
 require 'rbsh'
 require 'rbsh/cli'
+require 'tapp'
 
 def capture_stdout
   old_stdout = $stdout.dup
@@ -11,4 +12,13 @@ def capture_stdout
   rd.read
 ensure
   $stdout = old_stdout
+end
+
+def rbsh(args)
+  capture_stdout do
+    begin
+      Rbsh::CLI.start(args.split(" "))
+    rescue SystemExit
+    end
+  end
 end
