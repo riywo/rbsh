@@ -25,8 +25,12 @@ class Rbsh::Pipeline < BasicObject
     result = to_ary
     result.join("")
   end
-
   alias inspect to_s
+  alias to_str to_s
+
+  def equal?(str)
+    to_s == str
+  end
 
   def method_missing(name, *args, &block)
     _push(name, *args)

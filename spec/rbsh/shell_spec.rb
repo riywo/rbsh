@@ -4,22 +4,32 @@ describe Rbsh::Shell do
   end
 
   describe "echo test" do
-    subject { @shell.echo("test").to_s }
+    before { @shell.echo("test") }
+    subject { @shell.run! }
     it { should eq "test\n" }
   end
 
   describe "echo test | grep test" do
-    subject { @shell.echo("test").grep("test").to_s }
+    before { @shell.echo("test").grep("test") }
+    subject { @shell.run! }
     it { should eq "test\n" }
   end
 
   describe "echo test | grep no" do
-    subject { @shell.echo("test").grep("no").to_s }
+    before { @shell.echo("test").grep("no") }
+    subject { @shell.run! }
     it { should eq "\n" }
   end
 
   describe "load_script! 'echo(\"test\")'" do
-    subject { @shell.load_script!('echo("test")').to_s }
+    before { @shell.load_script!('echo("test")') }
+    subject { @shell.run! }
     it { should eq "test\n" }
+  end
+
+  describe "echo test1; echo test2" do
+    before { @shell.echo("test1"); @shell.echo("test2") }
+    subject { @shell.run! }
+    it { should eq "test1\ntest2\n" }
   end
 end
