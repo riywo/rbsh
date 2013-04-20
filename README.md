@@ -1,5 +1,7 @@
 # Rbsh
 
+[![Build Status](https://travis-ci.org/riywo/rbsh.png)](https://travis-ci.org/riywo/rbsh)
+
 TODO: Write a gem description
 
 ## Installation
