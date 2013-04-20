@@ -2,7 +2,18 @@
 
 [![Build Status](https://travis-ci.org/riywo/rbsh.png)](https://travis-ci.org/riywo/rbsh)
 
-TODO: Write a gem description
+Yet Another shell script
+
+## Usage
+
+    echo("test")
+    #=> "test\n"
+    
+    echo("test").grep("test")
+    #=> "test\n"
+    
+    echo("test").grep("no")
+    #=> "\n"
 
 ## Installation
 
