@@ -7,34 +7,39 @@ class Rbsh::Pipeline < BasicObject
     _push(name, *args)
   end
 
-  def to_ary
+  def run!
     commands = _queue.map do |c|
       [ c[:command], *c[:args] ].compact.map(&:to_s)
     end
 
-    result = []
+    result = Result.new
     ::Open3.pipeline_rw(*commands) do |stdin, stdout, wait_threads|
       stdin.close
-      result = stdout.readlines
+      lines = stdout.readlines
+      lines = ["\n"] if lines.size == 0
+      result.set(lines)
     end
-    result << "\n" if result == []
     result
-  end
-
-  def to_s
-    result = to_ary
-    result.join("")
-  end
-  alias inspect to_s
-  alias to_str to_s
-
-  def equal?(str)
-    to_s == str
   end
 
   def method_missing(name, *args, &block)
     _push(name, *args)
     self
+  end
+
+  class Result
+    def set(lines)
+      @lines = lines
+    end
+
+    def to_ary
+      @lines
+    end
+
+    def to_s
+      @lines.join("")
+    end
+    alias inspect to_s
   end
 
   protected

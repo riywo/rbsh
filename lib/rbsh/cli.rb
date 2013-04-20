@@ -18,7 +18,7 @@ class Rbsh::CLI
     if    @opts.has_key? :v
       puts Rbsh::VERSION
     elsif @opts.has_key? :e
-      puts @shell.load_script!(@opts[:e])
+      puts @shell.load_script!(@opts[:e]).run!.to_s
     else
       script_file = ARGV[0]
     end
