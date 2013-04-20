@@ -7,19 +7,25 @@ class Rbsh::Shell < BasicObject
     instance_eval(script)
   end
 
-  def to_s
+  def to_ary
     commands = _queue.map do |c|
       [ c[:command], *c[:args] ].compact.map(&:to_s)
     end
 
-    result = nil
+    result = []
     ::Open3.pipeline_rw(*commands) do |stdin, stdout, wait_threads|
       stdin.close
-      result = stdout.read
+      result = stdout.readlines
     end
-    result += "\n" if result == ""
+    result << "\n" if result == []
     result
   end
+
+  def to_s
+    result = to_ary
+    result.join("")
+  end
+
   alias inspect to_s
 
   def method_missing(name, *args, &block)
