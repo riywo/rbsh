@@ -1,6 +1,7 @@
 # Rbsh
 
 [![Build Status](https://travis-ci.org/riywo/rbsh.png)](https://travis-ci.org/riywo/rbsh)
+[![Code Climate](https://codeclimate.com/github/riywo/rbsh.png)](https://codeclimate.com/github/riywo/rbsh)
 
 Yet Another shell script
 
